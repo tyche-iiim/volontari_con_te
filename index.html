@@ -1,0 +1,822 @@
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link href="https://fonts.googleapis.com" rel="preconnect" />
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&amp;family=Poppins:wght@300;400;600;700&amp;display=swap" rel="stylesheet" />
+<style type="text/css">/* Stili CSS modificati per il nuovo pubblico */
+  :root {
+    --darker-blue: #0d2847;
+    --primary-blue: #1e5fa8;
+    --secondary-blue: #2a6bb3;
+    --section-bg-dark: rgba(22, 64, 128, 0.75);
+    --card-bg-transparent: rgba(30, 95, 168, 0.15);
+    --primary-blue-transparent-light: rgba(30, 95, 168, 0.15);
+    --flare-gold-transparent: rgba(255, 215, 0, 0.4);
+    --accent-gold: #ffd700;
+    --light-gold: #ffed4e;
+    --warm-orange: #ff9900;
+    --deep-orange: #cc7a00;
+    --white: #ffffff;
+    --light-grey: #f0f8ff;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    color: var(--white);
+    /* Immagine di mani che si stringono per solidarietà */
+    background: 
+      linear-gradient(rgba(13, 40, 71, 0.85), rgba(0, 0, 0, 0.95)),
+      url('https://images.unsplash.com/photo-1549492167-160bf214d06a?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  /* Utility Classes */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+  .text-center {
+    text-align: center;
+  }
+  /* Animazioni */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+      filter: blur(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+  @keyframes slowZoomIn {
+    from {
+      transform: scale(0.8);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes revealTitle {
+    0% {
+      opacity: 0;
+      filter: blur(10px);
+      letter-spacing: -10px;
+    }
+    70% {
+      opacity: 0.8;
+      filter: blur(1px);
+      letter-spacing: 5px;
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+      letter-spacing: 5px;
+    }
+  }
+  @keyframes revealSubtitle {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes pulseGlow {
+    0% {
+      box-shadow: 0 0 15px rgba(255, 153, 0, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(255, 153, 0, 0.8), 0 0 40px rgba(30, 95, 168, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 15px rgba(255, 153, 0, 0.5);
+    }
+  }
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 0;
+    z-index: 1;
+  }
+  .hero-content {
+    position: relative;
+    text-align: center;
+    transform: scale(0.8);
+    animation: slowZoomIn 10s ease-out 1s forwards;
+    z-index: 2;
+    padding: 3rem;
+    background: var(--card-bg-transparent);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+  }
+  .project-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10vw;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 5px;
+    position: relative;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: revealTitle 4s ease-out 1s forwards;
+    text-shadow: 
+      0 0 10px rgba(255, 255, 255, 0.3),
+      0 0 25px rgba(30, 95, 168, 0.4),
+      0 0 50px rgba(30, 95, 168, 0.3);
+  }
+  .project-subtitle-container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 2vw;
+    font-weight: 600;
+    color: var(--warm-orange);
+    text-shadow: 0 0 15px rgba(255, 153, 0, 0.5);
+  }
+  .project-subtitle-word {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealSubtitle 2s ease-out forwards;
+  }
+  .project-subtitle-word:nth-child(1) {
+    animation-delay: 3s;
+  }
+  .project-subtitle-word:nth-child(2) {
+    animation-delay: 3.5s;
+  }
+  .project-subtitle-word:nth-child(3) {
+    animation-delay: 4s;
+  }
+  .hero p {
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 1.5rem auto;
+  }
+  .hero p:nth-of-type(1) {
+    animation-delay: 4.5s;
+  }
+  .hero p:nth-of-type(2) {
+    animation-delay: 5s;
+  }
+  /* New section for volunteer call to action */
+  .volunteer-cta-section {
+    padding: 6rem 2rem;
+    background: linear-gradient(rgba(13, 40, 71, 0.8), rgba(0, 0, 0, 0.9));
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    border-bottom: 5px solid var(--warm-orange);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .volunteer-cta-card {
+    background: rgba(30, 95, 168, 0.25);
+    padding: 4rem;
+    border-radius: 20px;
+    border: 2px solid var(--warm-orange);
+    max-width: 800px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s ease-out;
+  }
+  .volunteer-cta-card h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--accent-gold);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  .volunteer-cta-card p {
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    opacity: 0.9;
+  }
+  .cta-button {
+    display: inline-block;
+    padding: 1.7rem 3.5rem;
+    background: linear-gradient(45deg, var(--warm-orange), var(--light-gold));
+    color: var(--darker-blue);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.3rem;
+    border-radius: 60px;
+    transition: all 0.4s ease;
+    box-shadow: 0 15px 40px rgba(255, 153, 0, 0.4);
+    animation: pulseGlow 2s infinite, fadeInUp 1s ease-out 0.4s both;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 2px solid var(--white);
+  }
+  .cta-button:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(255, 153, 0, 0.6);
+    background: linear-gradient(45deg, var(--light-gold), var(--warm-orange));
+    border-color: var(--accent-gold);
+  }
+  /* Sezione Dati e Missione */
+  .key-message {
+    background: 
+      linear-gradient(rgba(22, 64, 128, 0.75), rgba(22, 64, 128, 0.85)),
+      url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    border-bottom: 5px solid var(--warm-orange);
+  }
+  .key-message h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, var(--accent-gold), var(--warm-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInUp 1s ease-out;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  .key-message p {
+    font-size: 1.4rem;
+    max-width: 900px;
+    margin: 0 auto 3.5rem;
+    line-height: 1.8;
+    opacity: 0.95;
+    animation: fadeInUp 1s ease-out 0.2s both;
+  }
+  .data-section {
+    background: var(--section-bg-dark);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  .data-section h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--accent-gold);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  .data-cards-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .data-card {
+    background: var(--card-bg-transparent);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    max-width: 350px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+  }
+  .data-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-color: var(--warm-orange);
+  }
+  .data-card h4 {
+    font-size: 1.8rem;
+    color: var(--warm-orange);
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .data-card p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+  /* Sezione "Chi siamo" modificata */
+  .about-us {
+    background: 
+      linear-gradient(rgba(22, 64, 128, 0.85), rgba(22, 64, 128, 0.9)),
+      url('https://images.unsplash.com/photo-1549492167-160bf214d06a?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 6rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .about-us h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  .about-us p {
+    font-size: 1.4rem;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+    opacity: 0.95;
+  }
+  /* Processo di Volontariato */
+  .process-section {
+    background: 
+      linear-gradient(rgba(22, 64, 128, 0.75), rgba(22, 64, 128, 0.85)),
+      url('https://images.unsplash.com/photo-1506748687229-7d722d612674?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 6rem 2rem;
+    position: relative;
+    z-index: 1;
+    box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  .process-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4rem;
+    animation: fadeInUp 1s ease-out;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+  }
+  .process-step-card {
+    background: var(--card-bg-transparent);
+    padding: 3rem;
+    border-radius: 25px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    text-align: center;
+    color: var(--white);
+    transition: all 0.4s ease;
+    animation: fadeInUp 1s ease-out;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .process-step-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+    border-color: var(--warm-orange);
+  }
+  .step-number {
+    font-family: 'Montserrat', sans-serif;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, var(--warm-orange), var(--accent-gold));
+    color: var(--darker-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 auto 1.8rem;
+    box-shadow: 0 8px 20px rgba(255, 153, 0, 0.4);
+    transition: all 0.3s ease;
+  }
+  .process-step-card:hover .step-number {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(255, 153, 0, 0.6);
+  }
+  .step-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: var(--accent-gold);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  .step-description {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    line-height: 1.7;
+  }
+  /* Benefici del volontariato */
+  .benefits {
+    background: 
+      linear-gradient(rgba(22, 64, 128, 0.75), rgba(22, 64, 128, 0.85)),
+      url('https://images.unsplash.com/photo-1521737711867-ee1d21650ed6?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 6rem 2rem;
+    position: relative;
+    z-index: 1;
+    box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  .benefits h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    background: linear-gradient(45deg, var(--white), var(--light-grey));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInUp 1s ease-out;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+  }
+  .benefit-card {
+    background: var(--card-bg-transparent);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+    animation: fadeInUp 1.5s ease-out;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+  }
+  .benefit-card:hover {
+    transform: translateY(-10px) scale(1.01);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+    border-color: var(--warm-orange);
+  }
+  .benefit-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--accent-gold);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  .benefit-card p {
+    font-size: 1.05rem;
+    opacity: 0.95;
+    line-height: 1.7;
+  }
+  /* Footer */
+  .footer {
+    background: var(--darker-blue);
+    color: var(--white);
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 5px solid var(--warm-orange);
+    box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.3);
+  }
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .footer-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: var(--accent-gold);
+  }
+  .quote-footer {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-top: 2rem;
+    opacity: 0.95;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.3);
+  }
+  .contact-info {
+    margin: 1.5rem 0;
+    opacity: 0.9;
+  }
+  .contact-link {
+    color: var(--accent-gold);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .contact-link:hover {
+    color: var(--light-gold);
+    text-decoration: underline;
+  }
+  .disclaimer-footer {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-top: 1rem;
+  }
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero {
+      min-height: auto;
+      padding: 3rem 0;
+    }
+    .hero-content {
+      padding: 2rem;
+    }
+    .project-title {
+      font-size: 15vw;
+    }
+    .project-subtitle-container {
+      font-size: 3.5vw;
+      gap: 1.5rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+    }
+    .volunteer-cta-card h2 {
+      font-size: 2.5rem;
+    }
+    .volunteer-cta-card p {
+      font-size: 1.2rem;
+    }
+    .key-message h2, .process-section h2, .benefits h2, .about-us h2 {
+      font-size: 2.5rem;
+    }
+    .key-message p, .about-us p {
+      font-size: 1.2rem;
+    }
+    .cta-button {
+      padding: 1.2rem 2.5rem;
+      font-size: 1.1rem;
+    }
+    .data-cards-grid {
+      flex-direction: column;
+    }
+    .data-card {
+      max-width: 90%;
+    }
+    .process-grid, .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+    .process-step-card, .benefit-card {
+      padding: 2rem;
+    }
+    .step-number {
+      width: 60px;
+      height: 60px;
+      font-size: 2rem;
+    }
+    .step-title, .benefit-card h3 {
+      font-size: 1.4rem;
+    }
+    .step-description, .benefit-card p {
+      font-size: 1rem;
+    }
+    .footer-title {
+      font-size: 1.4rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .hero-content {
+      padding: 1.5rem;
+    }
+    .project-title {
+      font-size: 18vw;
+      letter-spacing: 2px;
+    }
+    .project-subtitle-container {
+      font-size: 4.5vw;
+      gap: 1rem;
+      flex-direction: column;
+    }
+    .volunteer-cta-card h2 {
+      font-size: 2rem;
+    }
+    .volunteer-cta-card p {
+      font-size: 1.1rem;
+    }
+    .key-message h2, .process-section h2, .benefits h2, .about-us h2 {
+      font-size: 2.2rem;
+    }
+    .key-message p, .about-us p {
+      font-size: 1.05rem;
+    }
+    .cta-button {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+    }
+    .step-number {
+      width: 50px;
+      height: 50px;
+      font-size: 1.8rem;
+    }
+  }
+</style>
+<section class="hero">
+<div class="hero-content">
+<h1 class="project-title">Con Te</h1>
+
+<div class="project-subtitle-container"><span class="project-subtitle-word">Accogliere.</span> <span class="project-subtitle-word">Integrare.</span> <span class="project-subtitle-word">Agire.</span></div>
+
+<p style="animation-delay: 4.5s;">Unisciti a un progetto internazionale che vuole riscrivere la storia della migrazione. Costruiamo un'infrastruttura legale, sicura e umana, ma per realizzarla abbiamo bisogno di te.<br />
+Il tuo aiuto può cambiare il destino di una persona.</p>
+
+<p style="animation-delay: 5s;">La solidarietà non è retorica. È un'azione concreta che può salvare vite.</p>
+</div>
+</section>
+
+<section class="volunteer-cta-section">
+<div class="container">
+<div class="volunteer-cta-card animation-element">
+<h2>Diventa Volontario</h2>
+
+<p>La tua conoscenza è una risorsa inestimabile. Insegna italiano per due ore, da casa tua, in ufficio, al pub o dove vuoi tu e aiuta un migrante a costruire il suo futuro. La tua solidarietà è l'antidoto all'indifferenza.</p>
+<a class="cta-button" href="https://forms.gle/uahSdMuHdBiN87Dc7" rel="noopener noreferrer" target="_blank">Iscriviti qui </a></div>
+</div>
+</section>
+
+<section class="data-section text-center">
+<div class="container">
+<h3>Numeri che non possiamo ignorare</h3>
+
+<p style="max-width: 900px; margin: 0 auto 3.5rem; font-size: 1.2rem;">Dietro ogni migrante c'è una storia di speranza, ma anche di immenso rischio.La migrazione non è solo un movimento di persone, ma spesso un tragico bilancio di vite perdute.</p>
+
+<div class="data-cards-grid">
+<div class="data-card animation-element">
+<h4>Oltre 29.000 morti</h4>
+
+<p>Persone che hanno perso la vita nel Mar Mediterraneo dal 2014, rendendolo il confine più letale del mondo. (Fonte: OIM - Organizzazione Internazionale per le Migrazioni).</p>
+</div>
+
+<div class="data-card animation-element">
+<h4>Migliaia in tutto il mondo</h4>
+
+<p>Ogni anno, migliaia di migranti muoiono o scompaiono in transito. Ad esempio, circa 1.400 solo tra il 2021 e il 2022 nel tentativo di attraversare il Darién Gap, tra Colombia e Panama. (Fonte: Ufficio delle Nazioni Unite per i Diritti Umani).</p>
+</div>
+
+<div class="data-card animation-element">
+<h4>L'indifferenza uccide</h4>
+
+<p>Questi numeri sono un promemoria costante che l'assenza di vie legali e sicure spinge le persone a rischiare tutto. Noi possiamo aiutarli.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="about-us text-center">
+<div class="container">
+<h2>Solidarietà fattiva</h2>
+
+<p>Il progetto "Con Te" nasce dalla ferma convinzione che l'istruzione sia lo strumento più potente per l'integrazione e la dignità umana. Siamo per una solidarietà fattiva, che dia strumenti di orientamento, difesa e coscienza ai lavoratori migranti nel mondo. Siamo un'organizzazione completamente autofinanziata, sostenuta dall'impegno di persone come te che credono in un mondo senza confini.</p>
+
+<p>Non servono lauree per insegnare, ma un solo elemento fondamentale: la volontà di aiutare. Offriamo lezioni di italiano online, garantendo flessibilità per i nostri studenti sparsi in tutto il mondo con fusi orari diversi. Inoltre, il nostro progetto a lungo termine prevede l'apertura di scuole fisiche gratuite in Italia e nei paesi d'origine dei migranti per offrire supporto ancora più diretto.</p>
+
+<p>Il tuo volontariato è un atto concreto contro il razzismo, l'individualismo e la xenofobia ed un'affermazione del valore della vita di ogni individuo, indipendentemente dalla sua provenienza, etnia o religione.</p>
+</div>
+</section>
+
+<section class="process-section text-center">
+<div class="container">
+<h2>Il tuo viaggio come volontario</h2>
+
+<div class="process-grid">
+<div class="process-step-card animation-element">
+<div class="step-number">1</div>
+
+<h3 class="step-title">Invia la tua candidatura</h3>
+
+<p class="step-description">Compila il nostro form di candidatura online. Non è richiesta esperienza pregressa, ma solo tanta passione e disponibilità.</p>
+</div>
+
+<div class="process-step-card animation-element">
+<div class="step-number">2</div>
+
+<h3 class="step-title">Incontro conoscitivo virtuale</h3>
+
+<p class="step-description">Uno dei membri del nostro staff ti contatterà per un colloquio virtuale informale, per conoscerci meglio e capire il tuo percorso di volontariato.</p>
+</div>
+
+<div class="process-step-card animation-element">
+<div class="step-number">3</div>
+
+<h3 class="step-title">Corso di formazione iniziale</h3>
+
+<p class="step-description">Parteciperai a un breve corso introduttivo gratuito di formazione, fondamentale per prepararti a insegnare in un contesto multiculturale e a gestire le sfide specifiche del nostro progetto.</p>
+</div>
+
+<div class="process-step-card animation-element">
+<div class="step-number">4</div>
+
+<h3 class="step-title">Inizia a insegnare</h3>
+
+<p class="step-description">Sei pronto! Dedica un paio d'ore a settimana, o più se puoi, per dare lezioni di italiano online. Puoi farlo da casa tua, a qualsiasi ora, per adattarti agli studenti di tutto il mondo in tutti i loro fusi orari.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="benefits text-center">
+<div class="container">
+<h2>Il tuo impatto, la nostra missione</h2>
+
+<div class="benefits-grid">
+<div class="benefit-card animation-element">
+<h3>Un atto di amore</h3>
+
+<p>Imparare una lingua può diventare possibilità di salvezza a persone che si trovano in zone di guerra, in campi profughi o in difficili condizioni di transito. Un aiuto disinteressato che può veramente cambiare una vita.</p>
+</div>
+
+<div class="benefit-card animation-element">
+<h3>Integrazione vera</h3>
+
+<p>Preparerai i migranti non solo per un lavoro, ma per una nuova vita. Il tuo insegnamento è la chiave per la loro dignità, sicurezza e integrazione.<br />
+Ti daremo gli strumenti per insegnare ma anche per aiutare a 360°</p>
+</div>
+
+<div class="benefit-card animation-element">
+<h3>Flessibilità e comunità</h3>
+
+<p>Insegna quando e dove vuoi. Sarai parte di una comunità internazionale di volontari, tutti uniti dalla stessa visione. Una comunità di Sentinelle della migrazione, un faro nel salto nel buio di ogni percorso migratorio</p>
+</div>
+
+<div class="benefit-card animation-element">
+<h3>Empowerment</h3>
+
+<p>Dando lezioni di lingua, restituisci potere e autonomia a chi ha rimesso tutto in discussione . La conoscenza che offri è il primo passo verso un futuro migliore.<br />
+Aiutando, scoprirai quanto ti farà sentire bene. Si riceve più di quello che si dà.</p>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="footer-content">
+<h3 class="footer-title">Con Te</h3>
+
+<p>Il ponte umano di empatia e solidarietà</p>
+
+<div class="contact-info">
+<p>✉️ Email: <a class="contact-link" href="mailto:info@tycheilma.com">info@tycheilma.com</a></p>
+
+<p>📞 WhatsApp: <a class="contact-link" href="https://wa.me/393462267861" target="_blank">+39 346 226 7861</a></p>
+
+<p>📱 Instagram: <a class="contact-link" href="https://instagram.com/tyche_ilma" target="_blank">@tyche_ilma</a> | <a class="contact-link" href="https://instagram.com/ilim_project" target="_blank">@ilim_project</a></p>
+</div>
+
+<p class="quote-footer">"Nessuno mette i propri figli su una barca a meno che l'acqua sia più sicura della terra." - Warsha Shire</p>
+
+<p class="disclaimer-footer">Il progetto "Con Te" è una iniziativa volontaria e senza scopo di lucro. Tutti i diritti riservati.</p>
+</div>
+</footer>
+<script>
+  // Intersection Observer per le animazioni al caricamento
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        entry.target.style.filter = 'blur(0)';
+        if (entry.target.classList.contains('animation-element')) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      } else {
+        entry.target.style.opacity = '0';
+        entry.target.style.transform = 'translateY(50px)';
+        entry.target.style.filter = 'blur(10px)';
+        if (entry.target.classList.contains('animation-element')) {
+          entry.target.style.animationPlayState = 'paused';
+        }
+      }
+    });
+  }, observerOptions);
+  document.querySelectorAll('.hero-content h1, .hero-content p, .volunteer-cta-card, .data-card, .about-us h2, .about-us p, .process-step-card, .benefits h2, .benefits-grid .benefit-card, .process-section h2').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(50px)';
+    el.style.filter = 'blur(10px)';
+    el.style.transition = 'all 1s ease-out';
+    el.style.animationFillMode = 'backwards';
+    observer.observe(el);
+  });
+  document.querySelectorAll('.project-subtitle-word').forEach(el => {
+    // Le parole del sottotitolo hanno già animazioni con delay
+  });
+</script>
